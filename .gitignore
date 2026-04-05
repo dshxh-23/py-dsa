@@ -10,5 +10,9 @@ wheels/
 .venv
 
 
-# Personal Notes
+# Personal files and folders
 NOTES/
+tp.py
+
+# VS Code Configurations
+.vscode/
