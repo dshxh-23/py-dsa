@@ -9,7 +9,7 @@ def knapsack_01(p, w, capacity):
     # initializing the 2d table: rows represent first i items, columns represent the capacity to be filled
     dp = [[0 for _ in range(capacity + 1)] for _ in range(n+1)]
 
-    for i in range(1, n+1):                 # starting from index 1 cuz first row is entirely filled with zeros
+    for i in range(1, n+1):                 # starting from index 1jcuz first row is entirely filled with zeros
         for maxm_w in range(1, capacity+1):      # starting from index 1 cuz the first col is also zeros
 
             # storing weight and profit of the element we'll decide to include or not for the cell 
