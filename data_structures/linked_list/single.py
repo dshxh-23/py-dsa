@@ -24,8 +24,12 @@ class LinkedList:
         return " => ".join(nodes) + " => None"
     
     def __repr__(self):
-        return f"Node({self.data})"
-
+        nodes = []
+        curr = self.head
+        while curr:
+            nodes.append(repr(curr.data))
+            curr = curr.next
+        return f"{self.__class__.__name__}([{', '.join(nodes)}])"
 
     ###################
 
