@@ -1,4 +1,5 @@
 from core.nodes import Node
+from core.exceptions import StackUnderflowError
 
 class LinkedStack:
     def __init__(self):
@@ -29,10 +30,12 @@ class LinkedStack:
 
 
     def is_empty(self):
+        """check if stack is empty or not"""
         return self.top is None
 
     
     def push(self, val):
+        """add element to top of the stack"""
         new = Node(val)
         new.next = self.top
         self.top = new
@@ -40,16 +43,16 @@ class LinkedStack:
 
 
     def _empty(self):
-        if self._size != 1:
-            raise ...
+        """internal helper to cleanly empty the stack and return the it's top"""
         del_val = self.top.data        
         self.top = None
         self._size = 0
         return del_val
         
     def pop(self):
+        """pop the top element of the stack"""
         if self.top is None:
-            raise ...
+            raise StackUnderflowError
         
         if self._size == 1:
             return self._empty()
@@ -61,12 +64,14 @@ class LinkedStack:
         
     
     def peek(self):
+        """return the top of the stack"""
         if self.top is None:
-            raise ...
+            raise StackUnderflowError()
         return self.top.data
 
     
     def size(self):
+        """return the size of the stack"""
         return self._size
     
 
