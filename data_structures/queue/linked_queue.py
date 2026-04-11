@@ -1,5 +1,5 @@
 from core.nodes import Node
-# import queue exceptions
+from core.exceptions import EmptyQueueError
 
 class LinkedQueue():
     def __init__(self):
@@ -47,6 +47,7 @@ class LinkedQueue():
 
 
     def _empty(self):
+        """internal helper to cleanly delete last value"""
         if self._size != 1:
             return
         
@@ -59,8 +60,9 @@ class LinkedQueue():
 
 
     def dequeue(self):
+        """delete at rear"""
         if self.rear is None and self.front is None:
-            raise ...
+            raise EmptyQueueError
         
         if self._size == 1:
             return self._empty()
@@ -72,14 +74,17 @@ class LinkedQueue():
 
 
     def peek(self):
+        """return front of the queue"""
         if self.front is None and self.rear is None:
-            raise ...
+            raise EmptyQueueError
         return self.top.data
 
     def is_empty(self):
+        """check weather the queue is empty or not"""
         return self.front is None and self.rear is None
 
     def size(self):
+        """return the size of the queue"""
         return self._size
 
 
