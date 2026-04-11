@@ -1,11 +1,11 @@
-class DSAException(Exception):
+class DSAError(Exception):
     """Base class for all DSA exceptions"""
     pass
 
 
 # ============== LINKED LIST EXCEPTIONS ============ # 
 
-class LinkedListError(DSAException):
+class LinkedListError(DSAError):
     """Base class for linked list errors"""
     pass
 
@@ -27,7 +27,7 @@ class InvalidIndexError(LinkedListError):
 
 # ============== STACK EXCEPTIONS ============ # 
 
-class StackError(DSAException):
+class StackError(DSAError):
     """Base class for all stack-related errors"""
     pass
 
@@ -41,3 +41,16 @@ class StackUnderflowError(StackError):
 #     """used for array_stack when size is fixed"""
 #     def __init__(self, message = "stack overflow."):
 #         super().__init__(message)
+
+
+# ============== QUEUE EXCEPTIONS ============ # 
+
+class QueueError(DSAError):
+    """base class for all queue-related errors"""
+    pass
+
+class EmptyQueueError(QueueError):
+    """raised when invalid operation is performed on an empty queue"""
+    def __init__(self, message = "queue is empty."):
+        super().__init__(message)
+
