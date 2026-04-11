@@ -10,4 +10,19 @@ class Node:
     def __str__(self):
         return f"{self.data}"
 
+
+class TreeNode:
+    """basic node structure for trees with 2 children"""
+    def __init__(self, val):
+        self.data = val
+        self.left = None
+        self.right = None
+
+    def __repr__(self):
+        return f"TreeNode({self.data})"
     
+    def __str__(self):
+        return f"{self.data}"
+
+    def is_leaf(self):
+        return self.left is None and self.right is None
