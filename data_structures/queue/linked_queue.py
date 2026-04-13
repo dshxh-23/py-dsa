@@ -60,7 +60,7 @@ class LinkedQueue():
 
 
     def dequeue(self):
-        """delete at rear"""
+        """delete at front"""
         if self.rear is None and self.front is None:
             raise EmptyQueueError
         
@@ -69,6 +69,7 @@ class LinkedQueue():
 
         del_val = self.front.data
         self.front = self.front.next
+        self._size -= 1
         return del_val
                 
 
