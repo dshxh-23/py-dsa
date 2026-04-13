@@ -54,3 +54,9 @@ class EmptyQueueError(QueueError):
     def __init__(self, message = "queue is empty."):
         super().__init__(message)
 
+
+# ============== TREE EXCEPTIONS ============ # 
+
+class TreeError(DSAError):
+    """base class for all tree-related errors"""
+    pass
