@@ -1,26 +1,41 @@
 from core.nodes import TreeNode
-# import tree exceptions also
+from core.exceptions import TreeError
+
 from data_structures.queue.linked_queue import LinkedQueue
 
+# ======================================== #
+
 class BinaryTree:
-    
-    # ---------- DUNDER METHODS ----------
     
     def __init__(self, root=None):
         self.root = root
         self._size = 0 if root is None else 1
 
+
+    # ---------- DUNDER METHODS ----------
+
     def __repr__(self):
         pass
 
+
     def __bool__(self):
-        pass
+        return True if self.root is not None else False
+
 
     def __iter__(self):
-        pass
+        q = LinkedQueue
+        q.enqueue(self.root)
+        while not q.is_empty():
+            curr = q.dequeue
+            if curr:
+                yield curr.data
+                q.enqueue(curr.left)
+                q.enqueue(curr.right)
+
 
     def __len__(self):
-        pass
+        return self._size
+
 
     def __str__(self):
         """simple level-order print"""
@@ -32,17 +47,14 @@ class BinaryTree:
         node_vals = []
         while not q.is_empty():
             curr = q.dequeue()
-            node_vals.append(str(curr.data))
 
-            if curr.left is not None:
+            if curr:
+                node_vals.append(str(curr.data))
                 q.enqueue(curr.left)
-            
-            if curr.left is not None:
                 q.enqueue(curr.right)
         
-        return f"Level order traversal: {' '.join(node_vals)}"
+        return f"Tree (Level Order Traversal): {' '.join(node_vals)}"
             
-
     
     # ---------- CORE UTILS ----------
     
@@ -59,8 +71,12 @@ class BinaryTree:
         return self.root
 
     def set_root(self, val):
-        """set val as root of tree"""
-        pass
+        """initialize tree with root node"""
+        if self._size != 0:
+            raise TreeError("Tree already has a root!")
+        
+        self.root = TreeNode(val)
+        self._size = 1
 
     
     # ---------- BASIC OPERATIONS ----------
@@ -162,14 +178,42 @@ class BinaryTree:
     
     def search(self, key):
         """return true if key exists"""
-    
+
+        if self.root is None:
+            return False
+
+        q = LinkedQueue()
+        q.enqueue(self.root)
+
+        while not q.is_empty():
+            curr = q.dequeue()
+
+            if curr.data == key:
+                return True
+
+            if curr.left:
+                q.enqueue(curr.left)
+
+            if curr.right:
+                q.enqueue(curr.right)
+
+        return False 
+
 
     def height(self):
-        """return height of tree"""
+        """return height of tree, -1 for empty tree and 0 for tree with only root node"""
+        def _height(node):
+            if node is None:
+                return -1
+
+            left_height = _height(node.left)
+            right_height = _height(node.right)
+            return 1 + max(left_height, right_height)
+
+        return _height(self.root)
 
 
-
-#=================================================================================================== 
+# ======================================== #
 
 
 def main():
@@ -184,11 +228,14 @@ def main():
         t.insert(8)
         t.insert(9)
         
+        print(t)
         print(t.inorder())
         print(t.preorder())
         print(t.postorder())
         print(t.level_order())
-        print(t)
+        print("5 in tree? " + str(t.search(5)))
+        print("11 in tree? " + str(t.search(11)))
+        print(f"height: {t.height()}")
 
 if __name__ == "__main__":
         main()
