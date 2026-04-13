@@ -145,7 +145,19 @@ class BinaryTree:
 
     def level_order(self):
         """traverse tree using level-order traversal"""
-        pass
+
+        result = []
+        q = LinkedQueue()
+        q.enqueue(self.root)
+
+        while not q.is_empty():
+            curr = q.dequeue()
+            if curr:
+                result.append(curr.data)
+                q.enqueue(curr.left)
+                q.enqueue(curr.right)
+            
+        return result
 
     
     def search(self, key):
@@ -162,9 +174,20 @@ class BinaryTree:
 
 def main():
         t = BinaryTree()
-        t.insert(10)
-        t.insert(20)
-        t.insert(30)
+        t.insert(1)
+        t.insert(2)
+        t.insert(3)
+        t.insert(4)
+        t.insert(5)
+        t.insert(6)
+        t.insert(7)
+        t.insert(8)
+        t.insert(9)
+        
+        print(t.inorder())
+        print(t.preorder())
+        print(t.postorder())
+        print(t.level_order())
         print(t)
 
 if __name__ == "__main__":
