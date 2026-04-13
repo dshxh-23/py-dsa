@@ -5,6 +5,7 @@ from data_structures.queue.linked_queue import LinkedQueue
 class BinaryTree:
     
     # ---------- DUNDER METHODS ----------
+    
     def __init__(self, root=None):
         self.root = root
         self._size = 0 if root is None else 1
@@ -43,7 +44,7 @@ class BinaryTree:
             
 
     
-    # ---------- BASIC OPERATIONS ----------
+    # ---------- CORE UTILS ----------
     
     def is_empty(self):
         """return true if tree is empty"""
@@ -62,7 +63,7 @@ class BinaryTree:
         pass
 
     
-    # ----------  ----------
+    # ---------- BASIC OPERATIONS ----------
 
     def insert(self, val):
         """insert val into tree, using level-order insertion to keep tree complete"""
@@ -96,17 +97,51 @@ class BinaryTree:
             q.enqueue(curr.left)
             q.enqueue(curr.right)
 
+
     def preorder(self):
-        """traverse tree uusing preorder traversal"""
-        pass
+        """traverse tree using preorder (data, left, right) traversal"""
+
+        result = []
+
+        def recurse(node):
+            if node:
+                result.append(node.data)
+                recurse(node.left)
+                recurse(node.right)
+
+        recurse(self.root)
+        return result
+
     
     def inorder(self):
-        """traverse tree uusing inorder traversal"""
-        pass
+        """traverse tree using inorder (left, data, right) traversal"""
+        
+        result = []
+
+        def recurse(node):
+            if node:
+                recurse(node.left)
+                result.append(node.data)
+                recurse(node.right)
+
+        recurse(self.root)
+        return result
+
 
     def postorder(self):
-        """traverse tree using postorder traversal"""
-        pass
+        """traverse tree using postorder (left, right, data) traversal"""
+        
+        result = []
+
+        def recurse(node):
+            if node:
+                recurse(node.left)
+                recurse(node.right)
+                result.append(node.data)
+        
+        recurse(self.root)
+        return result
+
 
     def level_order(self):
         """traverse tree using level-order traversal"""
