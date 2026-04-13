@@ -60,3 +60,21 @@ class EmptyQueueError(QueueError):
 class TreeError(DSAError):
     """base class for all tree-related errors"""
     pass
+
+class EmptyTreeError(TreeError):
+    """raised when invalid operation is performed on an empty tree"""
+    def __init__(self, message="tree is empty."):
+        super().__init__(message)
+
+
+class BSTError(TreeError):
+    """base class for all BST related errors"""
+    pass
+
+class DuplicateKeyError(BSTError):
+    """raised when inserting a duplicate key in BST"""
+    pass
+
+class KeyNotFoundError(BSTError):
+    """raised when a key does not exist in a BST"""
+    pass
