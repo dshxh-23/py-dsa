@@ -92,7 +92,7 @@ class BinarySearchTree():
 
 
     def delete():
-        pass
+        pass        # implement later
 
 
     # ---------- TRAVERSALS  ----------
@@ -122,12 +122,27 @@ class BinarySearchTree():
 
     # ---------- UTILITIES ----------
 
-    def find_min():
-        pass
+    def find_min(self):
+        if self.root is None:
+            raise EmptyTreeError()
+        
+        curr = self.root
+        while curr.left:
+            curr = curr.left
+        
+        return curr.data
 
 
-    def find_max():
-        pass
+
+    def find_max(self):
+        if self.root is None:
+            raise EmptyTreeError()
+        
+        curr = self.root
+        while curr.right:
+            curr = curr.right
+
+        return curr.data
 
 
     def height():
@@ -149,6 +164,8 @@ def main():
     print(bst.inorder())
     print(f"found 5? {bst.search(5)}")
     print(f"found 8? {bst.search(8)}")
+    print(f"minimum element: {bst.find_min()}")
+    print(f"maximum element: {bst.find_max()}")
 
 
 if __name__ == "__main__":
