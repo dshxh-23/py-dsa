@@ -2,6 +2,7 @@ from core.nodes import TreeNode
 from core.exceptions import *       # Replace * with specific errors used
 
 from data_structures.queue.linked_queue import LinkedQueue
+
 # ======================================== #
 
 class BinarySearchTree():
@@ -72,8 +73,22 @@ class BinarySearchTree():
         return self.root
         
 
-    def search():
-        pass
+    def search(self, key):
+        if self.root is None:
+            raise EmptyTreeError()
+        
+        curr = self.root
+        while curr:
+            if curr.data == key:
+                return True
+            
+            elif key < curr.data:
+                curr = curr.left
+            
+            else:
+                curr = curr.right
+        return False
+
 
 
     def delete():
@@ -83,15 +98,26 @@ class BinarySearchTree():
     # ---------- TRAVERSALS  ----------
 
     def inorder(self):
-        pass
+        """should return sorted order"""
+
+        result = []
+
+        def recurse(node):
+            if node:
+                recurse(node.left)
+                result.append(node.data)
+                recurse(node.right)
+            
+        recurse(self.root)
+        return result
 
     
     def preorder(self):
-        pass
+        ...         # implement later
 
 
     def postorder(self):
-        pass
+        ...         # implement later
 
 
     # ---------- UTILITIES ----------
@@ -120,7 +146,9 @@ def main():
     bst.insert(20)
     bst.insert(8)
     bst.insert(2)
-    print(bst)
+    print(bst.inorder())
+    print(f"found 5? {bst.search(5)}")
+    print(f"found 8? {bst.search(8)}")
 
 
 if __name__ == "__main__":
