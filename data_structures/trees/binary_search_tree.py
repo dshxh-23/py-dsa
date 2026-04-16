@@ -15,19 +15,32 @@ class BinarySearchTree():
     # ---------- DUNDER METHODS ----------
 
     def __repr__(self):
-        pass
+        return f"BinarySearchTree({self.inorder()})"
+
 
     def __bool__(self):
-        pass
+        return True if self.root else False
+
 
     def __iter__(self):
-        pass
+        def recurse(node):
+            if node:
+                recurse(node.left)
+                yield node.data
+                recurse(node.right)
+        recurse(self.root)
+
 
     def __len__(self):
-        pass
+        return self._size
+
 
     def __str__(self):
-        pass
+        if self.is_empty():
+            return " BST is empty."
+        
+        return ", ".join(map(str, self.inorder()))
+
 
     # ---------- CORE UTILS ----------
 
@@ -161,7 +174,7 @@ def main():
     bst.insert(20)
     bst.insert(8)
     bst.insert(2)
-    print(bst.inorder())
+    print(bst)
     print(f"found 5? {bst.search(5)}")
     print(f"found 8? {bst.search(8)}")
     print(f"minimum element: {bst.find_min()}")
