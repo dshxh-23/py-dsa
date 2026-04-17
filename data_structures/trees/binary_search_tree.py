@@ -1,7 +1,5 @@
 from core.nodes import TreeNode
-from core.exceptions import *       # Replace * with specific errors used
-
-from data_structures.queue.linked_queue import LinkedQueue
+from core.exceptions import EmptyTreeError, DuplicateKeyError
 
 # ======================================== #
 
@@ -25,9 +23,9 @@ class BinarySearchTree():
     def __iter__(self):
         def recurse(node):
             if node:
-                recurse(node.left)
+                yield from recurse(node.left)
                 yield node.data
-                recurse(node.right)
+                yield from recurse(node.right)
         recurse(self.root)
 
 
@@ -37,7 +35,7 @@ class BinarySearchTree():
 
     def __str__(self):
         if self.is_empty():
-            return " BST is empty."
+            return "BST is empty."
         
         return ", ".join(map(str, self.inorder()))
 
@@ -52,7 +50,7 @@ class BinarySearchTree():
         return self._size
 
 
-    # ---------- BASIC OPERAITONS ----------
+    # ---------- BASIC OPERATIONS ----------
 
     def insert(self, val):
         new_node = TreeNode(val)
@@ -87,9 +85,6 @@ class BinarySearchTree():
         
 
     def search(self, key):
-        if self.root is None:
-            raise EmptyTreeError()
-        
         curr = self.root
         while curr:
             if curr.data == key:
@@ -158,8 +153,17 @@ class BinarySearchTree():
         return curr.data
 
 
-    def height():
-        pass
+    def height(self):
+        """return the height of bst"""
+
+        def recurse(node):
+            if node:
+                left_h = recurse(node.left)
+                right_h = recurse(node.right)
+                return 1 + max(left_h, right_h)
+            return -1
+
+        return recurse(self.root)
 
 
 # ======================================== #
