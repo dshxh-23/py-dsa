@@ -1,113 +1,192 @@
-## Planned Project Structure
+# DSA Library in Python
+
+A structured, modular, and scalable implementation of **Data Structures and Algorithms in Python**, designed for deep understanding, clean architecture, and long-term reference.
+
+---
+
+## Overview
+
+This project is not just a collection of DSA problems—it is a **mini standard library** for:
+
+* Implementing core data structures
+* Designing reusable algorithms
+* Practicing interview-style problems
+* Understanding system-level design in Python
+
+---
+
+## 🏗Project Structure
 
 ``` bash
 dsa/
 │
-├── core/                         # Shared abstractions
-│   ├── __init__.py
-│   ├── node.py                   # Generic node definitions
-│   ├── exceptions.py             # Custom errors
-│   └── interfaces.py             # Abstract base classes
+├── core/                  # Shared components
+│   ├── node.py
+│   ├── interfaces.py
+│   └── exceptions.py
 │
-├── structures/                   # ALL data structures
-│   ├── __init__.py
-│   │
+├── structures/            # Data structures
+│   ├── array/
 │   ├── linked_list/
-│   │   ├── __init__.py
-│   │   ├── singly.py
-│   │   ├── doubly.py
-│   │   └── circular.py
-│   │
 │   ├── stack/
-│   │   ├── __init__.py
-│   │   ├── array_stack.py
-│   │   └── linked_stack.py
-│   │
 │   ├── queue/
-│   │   ├── __init__.py
-│   │   ├── simple_queue.py
-│   │   ├── circular_queue.py
-│   │   └── deque.py
-│   │
-│   ├── trees/
-│   │   ├── __init__.py
-│   │   ├── binary_tree.py
-│   │   ├── binary_search_tree.py
-│   │   ├── avl_tree.py
-│   │   ├── segment_tree.py
-│   │
-│   ├── heap/
-│   │   ├── __init__.py
-│   │   ├── min_heap.py
-│   │   ├── max_heap.py
-│   │
-│   ├── graph/
-│   │   ├── __init__.py
-│   │   ├── adjacency_list.py
-│   │   └── adjacency_matrix.py
-│   │
-│   └── hash/
-│       ├── __init__.py
-│       └── hashmap.py
+│   └── trees/
 │
-├── algorithms/                     # PURE algorithms (no DS logic inside)
-│   ├── __init__.py
-│   │
+├── algorithms/            # Reusable algorithms
 │   ├── linked_list/
-│   │   ├── cycle.py
-│   │   ├── reversal.py
-│   │   └── merge.py
-│   │
 │   ├── tree/
-│   │   ├── traversal.py
-│   │   ├── lca.py
-│   │   └── height.py
-│   │
-│   ├── graph/
-│   │   ├── bfs.py
-│   │   ├── dfs.py
-│   │   └── dijkstra.py
-│   │
-│   ├── sorting/
-│   │   ├── quicksort.py
-│   │   └── mergesort.py
-│   │
-│   └── searching/
-│       └── binary_search.py
-│
-├── problems/                       # Interview style problems
-│   ├── __init__.py
-│   │
-│   ├── arrays/
-│   ├── linked_list/
-│   ├── trees/
-│   ├── graphs/
-│   │
-│   ├── greedy/
-│   │   ├── p1_fractional_knapsack.py
-│   │   └── p2_activity_selection.py
-│   │
 │   ├── dp/
-│   │   ├── p1_01_knapsack.py
-│   │   └── p2_lcs.py
-│   │
-│   └── mixed/
-│        └── leetcode_ideas.py
+│   └── greedy/
 │
-├── utils/                          # Helpers, visualization, etc.
-│   ├── __init__.py
-│   ├── visualization.py
-│   └── helpers.py
+├── problems/              # Interview-style problems
 │
+├── tests/                 # Unit tests (pytest)
+├── benchmarks/            # Performance analysis
+├── utils/                 # Helpers + visualization
 │
-├── tests/                          # Unit tests
-│   ├── __init__.py
-│   ├── test_linked_list.py
-│   └── test_tree.py
-│
-│
-├── benchmarks/                     # Performance comparisons
-│   └── compare_structures.py
-│
-└── main.py
+└── main.py                # Entry point / demos
 ```
+
+---
+
+## 📦 Implemented Data Structures
+
+### Linked Lists
+
+* Singly Linked List
+* Doubly Linked List (under development)
+* Circular Linked List (under development)
+
+### Stack
+
+* Array-based Stack (planned)
+* Linked Stack
+
+### Queue
+
+* Simple Queue (planned)
+* Circular Queue (planned)
+* Linked Queue
+
+### Trees
+
+* Binary Tree
+* Binary Search Tree (BST)
+
+### Arrays (*coming soon!*)
+
+* Static Array
+* Dynamic Array (resizable)
+
+---
+
+## ⚙️ Algorithms
+
+Algorithms are organized by topic and separated from data structures. **Currently working on it.**
+
+### Examples:
+
+* Linked List
+
+  * Reverse List
+  * Cycle Detection
+
+* Trees
+
+  * BST Validation (multiple approaches)
+  * Traversals
+
+* Dynamic Programming *(planned)*
+
+* Greedy *(planned)*
+
+---
+
+## Design Philosophy
+
+### 1. Separation of Concerns
+
+* `structures/` → how data is stored
+* `algorithms/` → how data is processed
+* `problems/` → how concepts are applied
+
+
+### 2. Multiple Approaches per Problem
+
+Each algorithm may have:
+
+* Optimal solution
+* Alternative solutions
+* Brute-force approach
+
+Only the **best implementation is exposed**, while others remain for learning.
+
+### 3. Clean Python Design
+
+* Encapsulation (`_size`, `_root`)
+* Iterables (`__iter__`)
+* Debug-friendly (`__repr__`)
+* Consistent APIs via interfaces
+
+---
+
+### 4. Reusability
+
+Algorithms operate on:
+
+* raw nodes (`head`, `root`)
+* not tied to specific classes
+
+---
+
+## 🧠 Learning Goals
+
+This project helps you:
+
+* Master DSA concepts deeply
+* Understand time/space trade-offs
+* Learn clean code architecture
+* Build production-quality Python code
+
+---
+
+## 💡 Example Usage
+
+```python
+from structures.trees.binary_search_tree import BinarySearchTree
+
+bst = BinarySearchTree()
+bst.insert(10)
+bst.insert(5)
+bst.insert(15)
+
+print(bst)        # BST(5, 10, 15)
+
+for x in bst:
+    print(x)
+```
+
+---
+
+## 🤝 Contributing
+
+This is primarily a personal learning project, but suggestions and improvements are welcome.
+
+---
+
+## ⭐ Key Insight
+
+> *This project is not just about solving problems, it’s about building a **systematic understanding of data structures and algorithms**.*
+
+---
+
+## 📌 Author
+
+Built as part of a structured journey into:
+
+* Data Structures
+* Algorithms
+* System Design
+* Python Engineering
+
+---
