@@ -45,7 +45,7 @@ class StaticArray:
     # ---------- OPERATIONS ----------
 
     def insert(self, index, val):
-        if index < 0 or index >= self._size:
+        if index < 0 or index > self._size:
             raise ArrayIndexOutOfBoundsError()
         
         if self.is_full():
@@ -67,12 +67,12 @@ class StaticArray:
 
 
     def delete(self, index):
-        if index < 0 or index >= self._size:
-            raise ArrayIndexOutOfBoundsError()
-
         if self.is_empty():
             raise ArrayUnderflowError()
         
+        if index < 0 or index >= self._size:
+            raise ArrayIndexOutOfBoundsError()
+
         for i in range(index, self._size-1):
             self._data[i] = self._data[i+1]
         self._data[self._size-1] = None
