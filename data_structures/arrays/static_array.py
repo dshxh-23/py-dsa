@@ -1,4 +1,11 @@
-from core.exceptions import ArrayOverflowError, ArrayUnderflowError, ArrayIndexOutOfBoundsError
+from core.exceptions import (
+    ArrayOverflowError, 
+    ArrayUnderflowError, 
+    ArrayIndexOutOfBoundsError
+)
+
+# ======================================== #
+
 class StaticArray:
     def __init__(self, cap):
         self._capacity = cap
@@ -71,3 +78,43 @@ class StaticArray:
         self._data[self._size-1] = None
 
         self._size -= 1
+
+
+    # ---------- DUNDER METHODS ----------M
+
+    def __bool__(self):
+        return not self.is_empty()
+
+    def __len__(self):
+        return self.size()
+
+    def __iter__(self):
+        for i in range(self._size):
+            yield self._data[i]
+
+    def __repr__(self):
+        return f"StaticArray({list(self)})"
+
+    def __str__(self):
+        return f"[{', '.join(str(self._data[i]) for i in range(self._size))}]"
+
+
+# ======================================== #
+
+
+def main():
+    arr = StaticArray(10)
+    arr.append(1)
+    arr.append(1)
+    arr.append(3)
+    arr.append(5)
+    print(arr)
+    arr.insert(2, 2)
+    print(arr)
+    arr.delete(1)
+    print(arr)
+
+
+
+if __name__ == "__main__":
+    main()
