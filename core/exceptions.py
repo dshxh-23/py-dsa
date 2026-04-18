@@ -3,6 +3,28 @@ class DSAError(Exception):
     pass
 
 
+# ============== ARRAY EXCPETIONS ============ # 
+
+class ArrayError(DSAError):
+    """Base class for all array-related errors"""
+    pass
+
+class ArrayIndexOutOfBoundsError(ArrayError):
+    """raised when invalid index is passed in as argument"""
+    def __init__(self, message = "Array index out of bounds"):
+        super().__init__(message)
+
+class ArrayUnderflowError(ArrayError):
+    """raised when an invalid operation is performed on an empty array"""
+    def __init__(self, message = "Array is empty"):
+        super().__init__(message)
+
+class ArrayOverflowError(ArrayError):
+    """raised when inserting element after it's already full"""
+    def __init__(self, message = "Array is full. Cannot insert more elelments"):
+        super().__init__(message)
+        
+
 # ============== LINKED LIST EXCEPTIONS ============ # 
 
 class LinkedListError(DSAError):
