@@ -28,7 +28,7 @@ class BinarySearchTree():
                 yield from recurse(node.left)
                 yield node.data
                 yield from recurse(node.right)
-        recurse(self.root)
+        yield from recurse(self.root)
 
     # ----------
 
