@@ -88,15 +88,17 @@ class EmptyTreeError(TreeError):
     def __init__(self, message="tree is empty."):
         super().__init__(message)
 
+class KeyNotFoundError(TreeError):
+    """raised when a key does not exist in a tree"""
+    def __init__(self, message = "key does not exist"):
+        super().__init__(message)
+
 
 class BSTError(TreeError):
-    """base class for all BST related errors"""
+    """base class for all BST-related errors"""
     pass
 
 class DuplicateKeyError(BSTError):
     """raised when inserting a duplicate key in BST"""
-    pass
-
-class KeyNotFoundError(BSTError):
-    """raised when a key does not exist in a BST"""
-    pass
+    def __init__(self, message="cannot insert duplicate key."):
+        super().__init__(message)
