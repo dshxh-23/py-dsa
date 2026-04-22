@@ -6,57 +6,12 @@ from data_structures.queue.linked_queue import LinkedQueue
 # ======================================== #
 
 class BinaryTree:
-    
     def __init__(self, root=None):
         self.root = root
         self._size = 0 if root is None else 1
 
 
-    # ---------- DUNDER METHODS ----------
-
-    def __repr__(self):
-        pass
-
-
-    def __bool__(self):
-        return True if self.root is not None else False
-
-
-    def __iter__(self):
-        q = LinkedQueue
-        q.enqueue(self.root)
-        while not q.is_empty():
-            curr = q.dequeue
-            if curr:
-                yield curr.data
-                q.enqueue(curr.left)
-                q.enqueue(curr.right)
-
-
-    def __len__(self):
-        return self._size
-
-
-    def __str__(self):
-        """simple level-order print"""
-        if self.root is None:
-            return f"tree is empty!"
-
-        q = LinkedQueue()
-        q.enqueue(self.root)
-        node_vals = []
-        while not q.is_empty():
-            curr = q.dequeue()
-
-            if curr:
-                node_vals.append(str(curr.data))
-                q.enqueue(curr.left)
-                q.enqueue(curr.right)
-        
-        return f"Tree (Level Order Traversal): {' '.join(node_vals)}"
-            
-    
-    # ---------- CORE UTILS ----------
+    # ---------- BASIC ----------
     
     def is_empty(self):
         """return true if tree is empty"""
@@ -79,7 +34,7 @@ class BinaryTree:
         self._size = 1
 
     
-    # ---------- BASIC OPERATIONS ----------
+    # ---------- OPERATIONS ----------
 
     def insert(self, val):
         """insert val into tree, using level-order insertion to keep tree complete"""
@@ -113,6 +68,8 @@ class BinaryTree:
             q.enqueue(curr.left)
             q.enqueue(curr.right)
 
+
+    # ---------- TRAVERSAL ----------
 
     def preorder(self):
         """traverse tree using preorder (data, left, right) traversal"""
@@ -176,6 +133,8 @@ class BinaryTree:
         return result
 
     
+    # ---------- UTILS ----------
+
     def search(self, key):
         """return true if key exists"""
 
@@ -211,6 +170,50 @@ class BinaryTree:
             return 1 + max(left_height, right_height)
 
         return _height(self.root)
+
+
+    # ---------- DUNDER METHODS ----------
+
+    def __repr__(self):
+        pass
+
+
+    def __bool__(self):
+        return True if self.root is not None else False
+
+
+    def __iter__(self):
+        q = LinkedQueue
+        q.enqueue(self.root)
+        while not q.is_empty():
+            curr = q.dequeue
+            if curr:
+                yield curr.data
+                q.enqueue(curr.left)
+                q.enqueue(curr.right)
+
+
+    def __len__(self):
+        return self._size
+
+
+    def __str__(self):
+        """simple level-order print"""
+        if self.root is None:
+            return f"tree is empty!"
+
+        q = LinkedQueue()
+        q.enqueue(self.root)
+        node_vals = []
+        while not q.is_empty():
+            curr = q.dequeue()
+
+            if curr:
+                node_vals.append(str(curr.data))
+                q.enqueue(curr.left)
+                q.enqueue(curr.right)
+        
+        return f"Tree (Level Order Traversal): {' '.join(node_vals)}"
 
 
 # ======================================== #
