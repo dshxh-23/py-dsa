@@ -1,5 +1,5 @@
 from core.nodes import TreeNode
-from core.exceptions import EmptyTreeError, DuplicateKeyError
+from core.exceptions import EmptyTreeError, DuplicateKeyError, KeyNotFoundError
 
 # ======================================== #
 
@@ -15,10 +15,12 @@ class BinarySearchTree():
     def __repr__(self):
         return f"BinarySearchTree({self.inorder()})"
 
+    # ----------
 
     def __bool__(self):
         return True if self.root else False
 
+    # ----------
 
     def __iter__(self):
         def recurse(node):
@@ -28,10 +30,12 @@ class BinarySearchTree():
                 yield from recurse(node.right)
         recurse(self.root)
 
+    # ----------
 
     def __len__(self):
         return self._size
 
+    # ----------
 
     def __str__(self):
         if self.is_empty():
@@ -45,6 +49,7 @@ class BinarySearchTree():
     def is_empty(self):
         return True if self.root is None else False
 
+    # ----------
 
     def size(self):
         return self._size
@@ -83,6 +88,7 @@ class BinarySearchTree():
         self._size += 1
         return self.root
         
+    # ----------
 
     def search(self, key):
         curr = self.root
@@ -97,13 +103,57 @@ class BinarySearchTree():
                 curr = curr.right
         return False
 
+    # ----------
+    
+    def delete(self, val):
 
+        if self.root is None:
+            raise EmptyTreeError()
+        
+        def recurse(node, val):
 
-    def delete():
-        pass        # implement later
+            if not node:
+                raise KeyNotFoundError()            
 
+            if node.data < val:
+                node.right = recurse(node.right, val)
+                return node
+            
+            elif node.data > val:
+                node.left = recurse(node.left, val)
+                return node
+            
+            else:       # base case for recurse
+                
+                # CASE 1: delete leaf node
+                if node.left is None and node.right is None:
+                    self._size -= 1
+                    return None
 
-    # ---------- TRAVERSALS  ----------
+                # CASE 2.1: delete node with only left child
+                elif node.right is None:
+                    self._size -= 1
+                    return node.left
+                
+                # CASE 2.2: delete node with only right child
+                elif node.left is None:
+                    self._size -= 1
+                    return node.right
+
+                # CASE 3: delete node with both children
+                else:
+                    # getting the minimum value in right subtree
+                    curr = node.right
+                    while curr.left:
+                        curr = curr.left
+                    minm_val = curr.data
+                    node.data = minm_val
+                    node.right = recurse(node.right, minm_val)
+                    return node
+
+        self.root = recurse(self.root, val)
+
+    # ---------- TRAVERSALS ----------
 
     def inorder(self):
         """should return sorted order"""
@@ -119,18 +169,42 @@ class BinarySearchTree():
         recurse(self.root)
         return result
 
+    # ----------
     
     def preorder(self):
-        ...         # implement later
 
+        """returns tree elements as a list ordered by preorder traversal"""
+        result = []
+        
+        def recurse(node):
+            if node:
+                result.append(node.data)
+                recurse(node.left)
+                recurse(node.right)
+        
+        recurse(self.root)
+        return result
+
+    # ----------
 
     def postorder(self):
-        ...         # implement later
+        """returns tree elements as a list ordered by postorder traversal"""
+
+        result = []
+
+        def recurse(node):
+            if node:
+                recurse(node.left)
+                recurse(node.right)
+                result.append(node.data)
+        
+        recurse(self.root)
+        return result
 
 
     # ---------- UTILITIES ----------
 
-    def find_min(self):
+    def minm(self):
         if self.root is None:
             raise EmptyTreeError()
         
@@ -140,9 +214,9 @@ class BinarySearchTree():
         
         return curr.data
 
+    # ----------
 
-
-    def find_max(self):
+    def maxm(self):
         if self.root is None:
             raise EmptyTreeError()
         
@@ -152,6 +226,7 @@ class BinarySearchTree():
 
         return curr.data
 
+    # ----------
 
     def height(self):
         """return the height of bst"""
@@ -171,6 +246,8 @@ class BinarySearchTree():
 
 def main():
     bst = BinarySearchTree()
+    
+    # Insert nodes into the BST
     bst.insert(10)
     bst.insert(12)
     bst.insert(38)
@@ -178,11 +255,56 @@ def main():
     bst.insert(20)
     bst.insert(8)
     bst.insert(2)
-    print(bst)
-    print(f"found 5? {bst.search(5)}")
-    print(f"found 8? {bst.search(8)}")
-    print(f"minimum element: {bst.find_min()}")
-    print(f"maximum element: {bst.find_max()}")
+    bst.insert(11)
+    bst.insert(50)
+    bst.insert(35)
+    
+    print("Initial BST (in-order):", bst.inorder())
+    print("Initial size:", bst.size())
+    
+    # Test deleting a leaf node
+    print("\nDeleting leaf node 2...")
+    bst.delete(2)
+    print("BST after deleting 2 (in-order):", bst.inorder())
+    print("Size after deleting 2:", bst.size())
+    
+    # Test deleting a node with one child
+    print("\nDeleting node 3 (one child)...")
+    bst.delete(3)
+    print("BST after deleting 3 (in-order):", bst.inorder())
+    print("Size after deleting 3:", bst.size())
+    
+    # Test deleting a node with two children
+    print("\nDeleting node 10 (two children)...")
+    bst.delete(10)
+    print("BST after deleting 10 (in-order):", bst.inorder())
+    print("Size after deleting 10:", bst.size())
+    
+    # Test deleting a node that does not exist
+    print("\nAttempting to delete non-existent node 100...")
+    try:
+        bst.delete(100)
+    except KeyNotFoundError:
+        print("KeyNotFoundError: Node 100 does not exist.")
+    
+    # Test deleting the root node
+    print("\nDeleting root node 12...")
+    bst.delete(12)
+    print("BST after deleting root 12 (in-order):", bst.inorder())
+    print("Size after deleting root 12:", bst.size())
+    
+    # Test deleting all nodes
+    print("\nDeleting all nodes...")
+    for val in [8, 11, 20, 35, 38, 50]:
+        print(f"Deleting {val}...")
+        bst.delete(val)
+        print("BST (in-order):", bst.inorder())
+        print("Size:", bst.size())
+    
+    print("\nFinal BST (should be empty):", bst.inorder())
+    print("Final size (should be 0):", bst.size())
+
+
 
 
 if __name__ == "__main__":
