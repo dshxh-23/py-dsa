@@ -11,6 +11,7 @@ wheels/
 
 
 # Personal files and folders
+notes/
 NOTES.md
 dev_logs.md
 tp.py
