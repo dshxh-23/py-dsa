@@ -1,7 +1,7 @@
 from core.nodes import TreeNode
 from core.exceptions import TreeError
 
-from data_structures.queue.linked_queue import LinkedQueue
+from structures.queue.linked_queue import LinkedQueue
 
 # ======================================== #
 

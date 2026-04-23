@@ -1,6 +1,6 @@
 import pytest
 
-from data_structures.linked_list.single import LinkedList
+from structures.linked_list.single import LinkedList
 
 
 def make_linked_list(values):

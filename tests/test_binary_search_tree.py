@@ -1,5 +1,5 @@
 import pytest
-from data_structures.trees.binary_search_tree import BinarySearchTree
+from structures.trees.binary_search_tree import BinarySearchTree
 from core.exceptions import EmptyTreeError, DuplicateKeyError, KeyNotFoundError
 
 def make_sample_tree():
