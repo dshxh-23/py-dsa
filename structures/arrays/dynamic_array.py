@@ -17,28 +17,32 @@ class DynamicArray:
     # ---------- BASIC ----------
 
     def size(self):
-        pass
+        return self._size
 
     # ----------
 
     def capacity(self):
-        pass
+        return self._capacity
 
     # ----------
 
     def is_empty(self):
-        pass
+        return self._size == 0
 
     
     # ---------- ACCESS ----------
     
-    def get():
-        pass
+    def get(self, index):
+        if index < 0 or index >= self._size:
+            raise ArrayIndexOutOfBoundsError()
+        return self._data[index]
 
     # ----------
 
-    def set():
-        pass
+    def set(self, index, val):
+        if index < 0 or index >= self._size:
+            raise ArrayIndexOutOfBoundsError()
+        self._data[index] = val
 
     
     # ---------- OPERATIONS ----------
