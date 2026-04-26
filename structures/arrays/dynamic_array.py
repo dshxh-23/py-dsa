@@ -108,28 +108,25 @@ class DynamicArray:
     # ---------- DUNDER METHODS ----------
 
     def __bool__(self):
-        pass
+        return not self.is_empty()
 
     # ----------
 
     def __len__(self):
-        pass
+        return self._size
 
     # ----------
 
     def __iter__(self):
-        pass
+        for i in range(self._size):
+            yield self._data[i]
 
     # ----------
 
     def __repr__(self):
-        pass
+        return f"DynamicArray({list(self)})"
 
     # ----------
     
     def __str__(self):
-        pass
-
-
-
-    
+        return f"[{", ".join(self._data[i] for i in range(self._size))}]"
