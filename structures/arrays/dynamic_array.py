@@ -105,6 +105,7 @@ class DynamicArray:
         self._data = new_data
         self._capacity = new_cap
 
+
     # ---------- DUNDER METHODS ----------
 
     def __bool__(self):

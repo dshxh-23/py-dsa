@@ -73,7 +73,7 @@ dsa/
 * Binary Tree
 * Binary Search Tree (BST)
 
-### Arrays (*coming soon!*)
+### Arrays
 
 * Static Array
 * Dynamic Array (resizable)
