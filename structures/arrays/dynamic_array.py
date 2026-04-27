@@ -50,7 +50,7 @@ class DynamicArray:
     def append(self, val):
         """insert element at end of array"""
 
-        if self._size == self.capacity:
+        if self._size == self._capacity:
             self._resize(self._capacity * 2)
         
         self._data[self._size] = val
@@ -129,4 +129,28 @@ class DynamicArray:
     # ----------
     
     def __str__(self):
-        return f"[{", ".join(self._data[i] for i in range(self._size))}]"
+        if self.is_empty():
+            return "Array is Empty"
+        return f"[{', '.join(str(self._data[i]) for i in range(self._size))}]"
+    
+
+# ======================================== #
+
+
+def main():
+    arr = DynamicArray()
+    print(arr)
+    arr.append(10)
+    print(arr)
+    arr.append(20)
+    arr.append(30)
+    print(arr)
+    arr.delete(1)
+    arr.insert(1, 100)
+    print(arr)
+    print("array size: ", arr.size())
+
+
+
+if __name__ == "__main__":
+    main()
