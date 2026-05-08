@@ -1,5 +1,5 @@
 def main():
-    print("Hello from dsa!")
+    print("Welcome to my DSA repository!")
 
 
 if __name__ == "__main__":
