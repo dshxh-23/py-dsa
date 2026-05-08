@@ -143,12 +143,9 @@ class BinarySearchTree():
                 # CASE 3: delete node with both children
                 else:
                     # getting the minimum value in right subtree
-                    curr = node.right
-                    while curr.left:
-                        curr = curr.left
-                    minm_val = curr.data
-                    node.data = minm_val
-                    node.right = recurse(node.right, minm_val)
+                    min_node = self._find_min(node.right)
+                    node.data = min_node.data
+                    node.right = recurse(node.right, min_node.data)
                     return node
 
         self.root = recurse(self.root, val)
@@ -240,6 +237,33 @@ class BinarySearchTree():
 
         return recurse(self.root)
 
+    # ----------
+
+    def inorder_successor(self, val):
+        """returns the inorder successor of val"""
+
+        def recurse(node, val):
+            if node.data < val:
+                ...
+
+            elif node.data > val:
+                ...
+
+            else:
+                if node.right:
+                    return self._find_min(node.right)
+                ...
+
+        recurse(self.root, val)
+
+
+    # ---------- HELPERS ----------
+    
+    def _find_min(self, node):
+        """internal helper which returns the node with minimum value in a subtree"""
+        while node.left:
+            node = node.left
+        return node
 
 # ======================================== #
 
