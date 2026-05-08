@@ -117,6 +117,13 @@ class DynamicArray:
         return self._size
 
     # ----------
+    
+    def __getitem__(self, index):
+        if index < 0 or index >= self._size:
+            raise ArrayIndexOutOfBoundsError()
+        return self._data[index]
+
+    # ----------
 
     def __iter__(self):
         for i in range(self._size):
