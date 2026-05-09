@@ -1,4 +1,4 @@
-from core.nodes import TreeNode
+from structures.nodes import TreeNode
 from core.exceptions import TreeError
 
 from structures.queue.linked_queue import LinkedQueue

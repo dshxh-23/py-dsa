@@ -1,4 +1,4 @@
-from core.nodes import Node
+from structures.nodes import Node
 from core.exceptions import EmptyQueueError
 
 class LinkedQueue():
