@@ -125,6 +125,13 @@ class DynamicArray:
 
     # ----------
 
+    def __setitem__(self, index, val):
+        if index < 0 or index >= self._size:
+            raise ArrayIndexOutOfBoundsError()
+        self._data[index] = val
+
+    # ----------
+
     def __iter__(self):
         for i in range(self._size):
             yield self._data[i]

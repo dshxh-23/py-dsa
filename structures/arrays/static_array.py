@@ -80,25 +80,42 @@ class StaticArray:
         self._size -= 1
 
 
-    # ---------- DUNDER METHODS ----------M
+    # ---------- DUNDER METHODS ----------
 
     def __bool__(self):
         return not self.is_empty()
 
+    # ----------
+
     def __len__(self):
         return self.size()
     
+    # ----------
+
     def __getitem__(self, index):
         if index < 0 or index >= self._size:
             raise ArrayIndexOutOfBoundsError()
         return self._data[index]
 
+    # ----------
+
+    def __setitem__(self, index, val):
+        if index < 0 or index >= self._size:
+            raise ArrayIndexOutOfBoundsError()
+        self._data[index] = val
+
+    # ----------
+
     def __iter__(self):
         for i in range(self._size):
             yield self._data[i]
 
+    # ----------
+
     def __repr__(self):
         return f"StaticArray({list(self)})"
+
+    # ----------
 
     def __str__(self):
         return f"[{', '.join(str(self._data[i]) for i in range(self._size))}]"
