@@ -12,11 +12,12 @@ wheels/
 
 # Personal files and folders
 notes/
+tp/
+personal/
 NOTES.md
 dev_logs.md
 tp.py
 tp.md
-tp/
 
 # VS Code Configurations
 .vscode/
