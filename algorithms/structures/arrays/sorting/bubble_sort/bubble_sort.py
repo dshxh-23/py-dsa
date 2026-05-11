@@ -1,4 +1,5 @@
 from algorithms.utils.swap import swap
+
 def sort(arr, reverse=False):
     """in-place sorting using bubble sort"""
 
@@ -11,4 +12,5 @@ def sort(arr, reverse=False):
             else:
                 if arr[j] > arr[j+1]:
                     swap(arr, j, j+1)
+
     return
