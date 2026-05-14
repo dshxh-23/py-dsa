@@ -1,5 +1,5 @@
 [project]
-name = "pyDSA"
+name = "py_dsa"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
