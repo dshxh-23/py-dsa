@@ -3,6 +3,7 @@ from core.exceptions import (
     ArrayUnderflowError, 
     ArrayIndexOutOfBoundsError
 )
+from core.decorators.complexity import complexity, complexity_report
 
 # ======================================== #
 
@@ -15,27 +16,33 @@ class StaticArray:
 
     # ---------- BASIC ----------
 
+    @complexity(time='O(1)', space='O(1)')
     def size(self):
         return self._size
 
+    @complexity(time='O(1)', space='O(1)')
     def capacity(self):
         return self._capacity
 
+    @complexity(time='O(1)', space='O(1)')
     def is_full(self):
         return self._size == self._capacity
     
+    @complexity(time='O(1)', space='O(1)')
     def is_empty(self):
         return self._size == 0
 
 
     # ---------- ACCESS ----------
 
+    @complexity(time='O(1)', space='O(1)')
     def get(self, index):
         if index < 0 or index >= self._size:
             raise ArrayIndexOutOfBoundsError()
         return self._data[index]
 
 
+    @complexity(time='O(1)', space='O(1)')
     def set(self, index, val):
         if index < 0 or index >= self._size:
             raise ArrayIndexOutOfBoundsError()
@@ -44,6 +51,7 @@ class StaticArray:
 
     # ---------- OPERATIONS ----------
 
+    @complexity(time="O(n)", space="O(1)")
     def insert(self, index, val):
         if index < 0 or index > self._size:
             raise ArrayIndexOutOfBoundsError()
@@ -58,6 +66,7 @@ class StaticArray:
         self._size += 1
 
 
+    @complexity(time='O(1)', space='O(1)')
     def append(self, val):
         if self.is_full():
             raise ArrayOverflowError()
@@ -66,6 +75,7 @@ class StaticArray:
         self._size += 1
 
 
+    @complexity(time='O(n)', space='O(1)')
     def delete(self, index):
         if self.is_empty():
             raise ArrayUnderflowError()
