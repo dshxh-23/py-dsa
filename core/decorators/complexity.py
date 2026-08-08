@@ -1,7 +1,13 @@
 import functools
 
+
+# ---- ---- Schema ---- ----
+
+
 class ComplexityInfo:
-    __slots__ = {'time', 'space', 'note'}
+    """Container for a function's complexity metadata."""
+
+    __slots__ = ("time", "space", "note")
 
     def __init__(self, time, space, note):
         self.time = time
@@ -15,19 +21,27 @@ class ComplexityInfo:
         return base + ")"
 
 
+# ---- ---- Decorator ---- ----
+
 
 def complexity(time, space, note=None):
 
+    # DECORATOR: returns wrapped function with complexity info attached to function object.
     def decorator(func):
 
+        # The wrapper function that replaces func
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
-            return func(*args, **kwargs)
-            
-        wrapper._complexity = ComplexityInfo(time=time, space=space, note=note)
+            return func(*args, **kwargs)    # NO change needed in the functions behavior
+
+        # add complxity info to the function object
+        wrapper._complexity = ComplexityInfo(time, space, note)
 
         return wrapper
-    return decorator
+    return decorator        
+        
+
+# ---- ---- Function ---- ----
 
 
 def complexity_report(obj):
@@ -51,18 +65,18 @@ def complexity_report(obj):
 
         method = getattr(cls, name, None)   # get attribute or None if it doesn't exist
 
-        if callable(method) and hasattr(method, '_complexity'):
+        if callable(method) and hasattr(method, "_complexity"):
             info = method._complexity
 
             print(f"\n  {name}()")
             print(f"\tTime\t:\t{info.time}")
-            print(f"\tSpace\t:\t{info.time}")
+            print(f"\tSpace\t:\t{info.space}")
             if info.note:
                 print(f"\tNote\t:\t{info.note}")
             
             found = True
-        
-        if not found:
-            print("No complexity decorators found.")
-        
-        print()
+
+    if not found:
+        print("\nNo complexity decorators found.")
+
+    print()
