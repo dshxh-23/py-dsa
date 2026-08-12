@@ -111,7 +111,7 @@ def solution(
 ):
     """Decorator factory to return custom decorator that attaches approach metadata to the function"""
 
-    if not isinstance(problem, str) or problem.strip():
+    if not isinstance(problem, str) or not problem.strip():
         raise ValueError(
             f"[APPROACH] 'problem_name' must be a string, got {problem!r}"
         )
@@ -122,7 +122,7 @@ def solution(
             f"[APPROACH] 'solution_number' must be a positive integer, got {solution_number!r}"
         )
 
-    if not isinstance(approach, str) or approach.strip():
+    if not isinstance(approach, str) or not approach.strip():
         raise ValueError(
             f"[APPROACH] 'approach' must be a non-empty string, got {approach!r}"
         )
