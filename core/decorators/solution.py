@@ -7,16 +7,28 @@ class SolutionInfo:
         "soln_number", 
         "approach", 
         "description", 
-        "note"
+        "time",
+        "space",
+        "note",
     }
 
     # -- -- -- --
 
-    def __init__(self, problem, soln_num, approach, desc="", note=""):
+    def __init__(self, 
+        problem, 
+        soln_num, 
+        approach="", 
+        desc="", 
+        time="", 
+        space="", 
+        note=""
+    ):
         self.problem = problem
         self.soln_number = soln_num
         self.approach = approach
         self.description = desc
+        self.time = time
+        self.space = space
         self.note = note
 
     # -- -- -- --
@@ -105,8 +117,10 @@ class SolutionRegistry:
 def solution(
     problem: str, 
     solution_number: int, 
-    approach: str, 
+    approach: str ="", 
     description: str ="", 
+    time: str = "",
+    space: str = "",
     note: str =""
 ):
     """Decorator factory to return custom decorator that attaches approach metadata to the function"""
@@ -122,13 +136,8 @@ def solution(
             f"[APPROACH] 'solution_number' must be a positive integer, got {solution_number!r}"
         )
 
-    if not isinstance(approach, str) or not approach.strip():
-        raise ValueError(
-            f"[APPROACH] 'approach' must be a non-empty string, got {approach!r}"
-        )
-
     def decorator(func):
-        info = SolutionInfo(problem, solution_number, approach, description, note)
+        info = SolutionInfo(problem, solution_number, approach, description, time, space, note)
 
         @functools.wraps(func)
         def wrapper(*args, **kwargs):

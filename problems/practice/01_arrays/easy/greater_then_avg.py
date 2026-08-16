@@ -1,3 +1,9 @@
+from problems import solution
+
+# ---- ---- ---- ----
+
+
+@solution("greater then average", 1)
 def count_gt_avg(arr):
     sum = 0
     for num in arr:
@@ -10,7 +16,7 @@ def count_gt_avg(arr):
             count += 1
     return count
 
-
+# -- -- -- --
 
 def main():
     arr1 = [3,5,2,4,6,11,0]
